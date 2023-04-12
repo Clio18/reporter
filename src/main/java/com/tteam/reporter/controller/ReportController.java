@@ -4,26 +4,32 @@ import com.tteam.reporter.model.ReportRequest;
 import com.tteam.reporter.model.ReportResponse;
 import com.tteam.reporter.service.ReportService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 //FOR TESTING
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/report", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReportController {
+    public static final String HEADER_ATTACH = "attachment; filename=\"";
 
     private final ReportService reportService;
 
-    @GetMapping
-    protected ResponseEntity<ReportResponse> getReport(){
-        ReportResponse reportResponse = reportService.buildReport(ReportRequest.builder().build());
+    @PostMapping
+    protected ResponseEntity<byte[]> getReport(@RequestBody ReportRequest request){
+        ReportResponse reportResponse = reportService.buildReport(request);
+        String filename = String.format("All_movies_report_%s.xlsx", LocalDate.now());
+
         return ResponseEntity
                 .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(reportResponse);
+                .header(HttpHeaders.CONTENT_DISPOSITION, HEADER_ATTACH + filename + "\"")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                //FIXME:
+                .body(reportResponse.getContent());
     }
 }

@@ -9,4 +9,5 @@ import lombok.Data;
 @Data
 public class ReportResponse {
     private String message;
+    private byte[] content;
 }
