@@ -16,6 +16,6 @@ public class MoviePojo {
     private Double price;
     private Double rating;
     private String poster;
-    private Set<CountryPojo> countriesDto;
-    private Set<GenrePojo> genresDto;
+    private Set<CountryPojo> countries;
+    private Set<GenrePojo> genres;
 }
