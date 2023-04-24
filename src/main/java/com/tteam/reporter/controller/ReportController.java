@@ -1,7 +1,9 @@
 package com.tteam.reporter.controller;
 
+import com.tteam.reporter.model.Report;
 import com.tteam.reporter.model.ReportRequest;
 import com.tteam.reporter.model.ReportResponse;
+import com.tteam.reporter.pojo.MoviePojo;
 import com.tteam.reporter.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +24,8 @@ public class ReportController {
 
     @PostMapping
     protected ResponseEntity<byte[]> getReport(@RequestBody ReportRequest request){
-        ReportResponse reportResponse = reportService.buildReport(request);
+        Report<MoviePojo> report = new Report<>();
+        ReportResponse reportResponse = reportService.buildReport(report);
         String filename = String.format("All_movies_report_%s.xlsx", LocalDate.now());
 
         return ResponseEntity
