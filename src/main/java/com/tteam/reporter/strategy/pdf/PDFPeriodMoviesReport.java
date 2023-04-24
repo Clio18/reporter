@@ -4,6 +4,8 @@ import com.tteam.reporter.model.ReportResponse;
 import com.tteam.reporter.strategy.StrategyName;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class PDFPeriodMoviesReport implements PDFReportStrategy {
     @Override
@@ -12,7 +14,7 @@ public class PDFPeriodMoviesReport implements PDFReportStrategy {
     }
 
     @Override
-    public ReportResponse generate() {
+    public ReportResponse generate(List<?> entities) {
         //get needed data
         //generate report
         //create ReportResponse

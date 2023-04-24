@@ -17,6 +17,8 @@
 	<properties>
 		<java.version>17</java.version>
 		<org.apache.poi.version>5.2.2</org.apache.poi.version>
+		<spring-cloud.version>4.0.2</spring-cloud.version>
+		<io.jsonwebtoken.version>0.11.5</io.jsonwebtoken.version>
 	</properties>
 
 	<dependencies>
@@ -33,6 +35,19 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
+		</dependency>
+
+		<!-- FEIGN -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>${spring-cloud.version}</version>
+		</dependency>
+
+		<!-- KAFKA -->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
 		</dependency>
 
 		<!-- SIMPLIFICATION -->
@@ -61,6 +76,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!--
+		Avoid vulnerabilities of spring-boot-starter-web:
+		CVE-2022-41854 6.5 Out-of-bounds Write vulnerability with medium severity
+		CVE-2022-1471 9.8 Deserialization of Untrusted Data vulnerability with high severity
+		-->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>2.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -1,8 +1,8 @@
 package com.tteam.reporter.strategy;
 
 import com.tteam.reporter.model.ReportResponse;
-import org.springframework.stereotype.Component;
+import java.util.List;
 
 public interface ReportStrategy {
-    ReportResponse generate();
+    ReportResponse generate(List<?> entities);
 }
